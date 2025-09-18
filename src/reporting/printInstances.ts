@@ -7,10 +7,21 @@ import type { WorkspaceInfo } from '../types';
  * @param config - Configuration containing output path
  */
 export function printInstances(workspaces: WorkspaceInfo[]): void {
+  // Calculate total instances first
+  let totalInstances = 0;
   for (const workspace of workspaces) {
     for (const pkg of workspace.packages) {
       for (const file of pkg.files) {
-        // Skip files with no JSX elements that have variant="secondary"
+        totalInstances += file.jsxElements.length;
+      }
+    }
+  }
+
+  // Print individual instances
+  for (const workspace of workspaces) {
+    for (const pkg of workspace.packages) {
+      for (const file of pkg.files) {
+        // Skip files with no JSX elements found
         if (file.jsxElements.length === 0) {
           continue;
         }
@@ -25,7 +36,7 @@ export function printInstances(workspaces: WorkspaceInfo[]): void {
           console.log(`${file.importDeclaration.code}${alias}`);
         }
 
-        // Print JSX elements (all elements in jsxElements now have variant="secondary")
+        // Print JSX elements
         for (const jsxElement of file.jsxElements) {
           console.log(
             `----- Line ${jsxElement.line} -----\n${jsxElement.code.trim()}`,
@@ -35,5 +46,6 @@ export function printInstances(workspaces: WorkspaceInfo[]): void {
     }
   }
 
-  console.log('\n');
+  // Print total count at the top
+  console.log(`\nTotal instances found: ${totalInstances}\n`);
 }
