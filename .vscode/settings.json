@@ -1,0 +1,57 @@
+{
+  "cSpell.words": [
+    "autodocs",
+    "Bhatia",
+    "clsx",
+    "codegen",
+    "commitlint",
+    "fc",
+    "copyfiles",
+    "deepmerge",
+    "dword",
+    "manypkg",
+    "Naresh",
+    "nareshbhatia",
+    "nextjs",
+    "Pkgs",
+    "Shadcn",
+    "tailwindcss",
+    "tsup",
+    "turborepo"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.indentSize": 2,
+  "eslint.rules.customizations": [
+    { "rule": "import/no-unresolved", "severity": "off" }
+  ],
+  "eslint.workingDirectories": [
+    "./",
+    { "pattern": "./apps/*/" },
+    { "pattern": "./packages/*/" },
+    { "pattern": "./plugins/*/" }
+  ],
+  "files.insertFinalNewline": true,
+  "prettier.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "find-components",
+  "description": "Find component instances across your code repository",
+  "version": "1.0.9",
+  "author": "Naresh Bhatia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nbhatia/find-components"
+  },
+  "keywords": [
+    "component",
+    "typescript",
+    "react",
+    "ast"
+  ],
+  "main": "./dist/index.js",
+  "files": [
+    "bin/fc",
+    "dist",
+    "README.md"
+  ],
+  "bin": {
+    "fc": "bin/fc"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "clean": "rimraf node_modules dist",
+    "create-config": "tsx src/index.ts --create-config",
+    "dev": "tsx watch src/index.ts",
+    "fc": "tsx src/index.ts --config=./fc-config.json",
+    "fix": "run-s _lint:fix _format:fix",
+    "lint": "run-s _lint _format",
+    "start": "node dist",
+    "_format": "prettier --list-different '*.{js,ts,json,md}' 'src/**/*.{css,js,jsx,ts,tsx,json,md}'",
+    "_format:fix": "npm run _format -- --write",
+    "_lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "_lint:fix": "npm run _lint -- --fix"
+  },
+  "dependencies": {
+    "expand-tilde": "^2.0.2",
+    "ts-morph": "^27.0.0",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "@code-shaper/eslint-config": "^2.*",
+    "@code-shaper/typescript-config": "^1.0.0",
+    "@types/expand-tilde": "^2.0.2",
+    "@types/node": "^24.3.1",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.20.5",
+    "typescript": "~5.9.2"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ],
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ]
+  }
+}
