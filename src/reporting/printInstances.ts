@@ -10,15 +10,8 @@ export function printInstances(workspaces: WorkspaceInfo[]): void {
   for (const workspace of workspaces) {
     for (const pkg of workspace.packages) {
       for (const file of pkg.files) {
-        // Check if file has JSX elements with variant="secondary"
-        const hasVariantSecondary = file.jsxElements.some(
-          (jsxElement) =>
-            jsxElement.code.includes('variant="secondary"') ||
-            jsxElement.code.includes("variant='secondary'"),
-        );
-
-        // Skip files with no relevant instances
-        if (!hasVariantSecondary && !file.importDeclaration) {
+        // Skip files with no JSX elements that have variant="secondary"
+        if (file.jsxElements.length === 0) {
           continue;
         }
 
@@ -32,17 +25,11 @@ export function printInstances(workspaces: WorkspaceInfo[]): void {
           console.log(`${file.importDeclaration.code}${alias}`);
         }
 
-        // Print JSX elements that have variant="secondary"
+        // Print JSX elements (all elements in jsxElements now have variant="secondary")
         for (const jsxElement of file.jsxElements) {
-          // Check if the JSX element has variant="secondary"
-          if (
-            jsxElement.code.includes('variant="secondary"') ||
-            jsxElement.code.includes("variant='secondary'")
-          ) {
-            console.log(
-              `----- Line ${jsxElement.line} -----\n${jsxElement.code.trim()}`,
-            );
-          }
+          console.log(
+            `----- Line ${jsxElement.line} -----\n${jsxElement.code.trim()}`,
+          );
         }
       }
     }

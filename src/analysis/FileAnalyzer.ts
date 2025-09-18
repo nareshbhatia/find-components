@@ -227,13 +227,20 @@ export class FileAnalyzer {
           : (jsxElement as JsxSelfClosingElement).getTagNameNode().getText();
 
       if (elementTagName === tagName) {
-        const lineNumber: number = jsxElement.getStartLineNumber();
-        jsxElements.push({
-          line: lineNumber,
-          column:
-            sourceFile.getLengthFromLineStartAtPos(jsxElement.getStart()) + 1,
-          code: jsxElement.getFullText().trim(),
-        });
+        // Check if this JSX element has variant="secondary" prop
+        const elementCode = jsxElement.getFullText().trim();
+        if (
+          elementCode.includes('variant="secondary"') ||
+          elementCode.includes("variant='secondary'")
+        ) {
+          const lineNumber: number = jsxElement.getStartLineNumber();
+          jsxElements.push({
+            line: lineNumber,
+            column:
+              sourceFile.getLengthFromLineStartAtPos(jsxElement.getStart()) + 1,
+            code: elementCode,
+          });
+        }
       }
     }
 
